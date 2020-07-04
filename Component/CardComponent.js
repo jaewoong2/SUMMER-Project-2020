@@ -1,25 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CardContet from './CardContet';
-import { Row, Col } from 'antd';
-import faker from 'faker';
+import { Row, Col, message } from 'antd';
+import { dummyCardMaking, LOAD_POST_REQUEST } from '../reducer/post';
+import { useDispatch, useSelector } from 'react-redux';
 
-const dummyCard = () => { 
-    const values = {
-        id : faker.random.number(),
-        title : faker.random.word(),
-        description : faker.random.words(),
-        image : faker.image.image()
-    }
-    return values
-}
-const dummy = Array(30).fill(0).map((v) => dummyCard())
+
 
 const CardComponent = () => {
+    const { mainPosts, loadPostLoading }  = useSelector(state => state.post);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+    const dummy = Array(30).fill(0).map((v) => dummyCardMaking())
+    mainPosts.length ===0 && dispatch({
+        type : LOAD_POST_REQUEST,
+        data : dummy,
+    })
+    console.log(mainPosts)
+    },[mainPosts])
+
+    useEffect(() =>{
+        loadPostLoading && message.loading('로딩 중 입니다')
+    },[loadPostLoading])
 
     return (
         <div>
             <Row style={{ marginTop : '15px', marginLeft : '15px', marginRight : '15px'}} gutter={[24, 24]}>
-            {dummy.map((v, i) => {
+            {mainPosts && mainPosts.map((v, i) => {
                 return (
                     <CardContet key={i + '안녕'} content={v} />
                 )

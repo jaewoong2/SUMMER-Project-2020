@@ -9,7 +9,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AppLayout>
-          '안녕하세요'
         </AppLayout>
     </div>
   )
