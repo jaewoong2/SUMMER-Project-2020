@@ -1,0 +1,14 @@
+import { takeLatest, delay, call, fork, all, put } from "redux-saga/effects"
+import { } from "../reducer/post"
+import axios from 'axios';
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+export default function* postSaga() {
+    yield all([
+      
+    ])
+}
